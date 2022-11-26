@@ -7,6 +7,8 @@
 
 Напишите запрос который найдет продукты с более чем 10-ю тегами.
 Select * FROM products 
-JOIN product_tags ON products.id = product_tags.product_id 
-GROUP BY products.id 
-HAVING Count(product_tags.product_id) > 10
+WHERE ID IN (
+    SELECT * FROM products
+    JOIN products_tags ON products.id = product_tags.product_id 
+    GROUP BY products.id 
+    HAVING Count(product_tags.id) > 10 )
